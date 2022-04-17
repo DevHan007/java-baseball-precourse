@@ -30,5 +30,24 @@ public class PlayerNumber {
         return pitcherNumberList;
     }
 
+    public List<String> batterGernerateNumber(String inputNumber) {
+        List<String> batterNumberList = new ArrayList<>();
+        for (String number : convertStringList(inputNumber)) {
+            batterNumberList = filteredGeneratedNumber(number, batterNumberList);
+        }
+        return batterNumberList;
+    }
+
+    public List<String> convertStringList(String targetNumber) {
+        List<String> userNumberList = new ArrayList<>();
+        if (!targetNumber.matches("[1-9]+")) {
+            return userNumberList;
+        }
+        for (char ch : targetNumber.toCharArray()) {
+            userNumberList.add(String.valueOf(ch));
+        }
+        return userNumberList;
+    }
+
 
 }
