@@ -1,7 +1,6 @@
 package baseball.view;
 
 import baseball.ballType.BallType;
-import baseball.ballType.Strike;
 import baseball.gamematch.BaseballGame;
 import org.junit.jupiter.api.Test;
 
@@ -26,12 +25,12 @@ public class BaseballGameViewTest {
 
     @Test
     void 게임결과_표출_테스트_2볼_1스트라이크() {
-        List<String> userNumberList2 = Arrays.asList("1", "2", "3");
-        List<String> comNumberList2 = Arrays.asList("2", "1", "3");
+        List<String> userNumberList2 = Arrays.asList("5", "9", "7");
+        List<String> comNumberList2 = Arrays.asList("5", "8", "9");
 
         List<BallType> resultList2 = baseballGame.gameStart(comNumberList2, userNumberList2);
         assertThat(baseballGameView.printGameResult(resultList2))
-                .isEqualTo("2볼 1스트라이크");
+                .isEqualTo("1볼 1스트라이크");
     }
 
     @Test

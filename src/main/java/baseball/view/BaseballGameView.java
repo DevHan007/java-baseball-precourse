@@ -11,66 +11,74 @@ import java.util.List;
 
 public class BaseballGameView {
 
+
     public String printGameResult(List<BallType> resultList) {
         int nothing = Collections.frequency(resultList, new Nothing());
+        int strike = Collections.frequency(resultList, new Strike());
+        int ball = Collections.frequency(resultList, new Ball());
         if (nothing == 3) {
-            System.out.println("낫싱");
             return "낫싱";
         }
-        System.out.println(printThreeBall(resultList) + printThreeStrike(resultList));
-        return printThreeBall(resultList) + printThreeStrike(resultList);
+        return printBallType(strike, ball);
     }
 
-    public String printThreeStrike(List<BallType> resultList) {
-        int strike = Collections.frequency(resultList, new Strike());
+    public String printBallType(int strike, int ball) {
+        return printThreeBall(ball) + printThreeStrike(strike);
+    }
+
+    public String printThreeStrike(int strike) {
         if (strike == 3) {
             return "3스트라이크";
         }
-        return printTwoStrike(resultList);
+        return printTwoStrike(strike);
     }
 
-    public String printTwoStrike(List<BallType> resultList) {
-        int strike = Collections.frequency(resultList, new Strike());
+    public String printTwoStrike(int strike) {
         if (strike == 2) {
             return "2스트라이크";
         }
-        return printOneStrike(resultList);
+        return printOneStrike(strike);
     }
 
-    public String printOneStrike(List<BallType> resultList) {
-        int strike = Collections.frequency(resultList, new Strike());
+    public String printOneStrike(int strike) {
         if (strike == 1) {
             return "1스트라이크";
         }
         return "";
     }
 
-    public String printThreeBall(List<BallType> resultList) {
-        int ball = Collections.frequency(resultList, new Ball());
+    public String printThreeBall(int ball) {
         if (ball == 3) {
             return "3볼";
         }
-        return printTwoBall(resultList);
+        return printTwoBall(ball);
     }
 
-    public String printTwoBall(List<BallType> resultList) {
-        int ball = Collections.frequency(resultList, new Ball());
+    public String printTwoBall(int ball) {
         if (ball == 2) {
-            return "2볼";
+            return "2볼 ";
         }
-        return printOneBall(resultList);
+        return printOneBall(ball);
     }
 
-    public String printOneBall(List<BallType> resultList) {
-        int ball = Collections.frequency(resultList, new Ball());
+    public String printOneBall(int ball) {
         if (ball == 1) {
-            return "1볼";
+            return "1볼 ";
         }
         return "";
     }
 
-    public String userNumberInput() {
-        System.out.println("숫자를 입력해주세요: ");
-        return Console.readLine();
+    public String inputUserNumber() {
+        System.out.print("숫자를 입력해주세요: ");
+        String number = Console.readLine();
+        return number;
     }
+
+    public String exitGame() {
+        System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임종료");
+        System.out.println("게임을 새로시작하려면 1, 종료하시려면 2를 입력하세요");
+        String number = Console.readLine();
+        return number;
+    }
+
 }

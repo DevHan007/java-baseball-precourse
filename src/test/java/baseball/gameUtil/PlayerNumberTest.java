@@ -3,6 +3,7 @@ package baseball.gameUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import java.util.List;
 
@@ -29,27 +30,29 @@ public class PlayerNumberTest {
                 .isNotEmpty()
                 .filteredOn(number -> Integer.parseInt(number) > 0)
                 .filteredOn(number -> Integer.parseInt(number) < 10);
+    }
 
-        String userInput2 = "1234";
-        List<String> resultList2 = playerNumber.batterGernerateNumber(userInput2);
-        assertThat(resultList2)
-                .hasSize(4);
-
+    @Test
+    void 입력_예외_테스트() {
         String userInput3 = "1234ddd";
-        List<String> resultList3 = playerNumber.batterGernerateNumber(userInput3);
-        assertThat(resultList3)
-                .hasSize(0);
+        assertThatThrownBy(() -> playerNumber.batterGernerateNumber(userInput3))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못입력하였습니다.");
 
         String userInput4 = "012";
-        List<String> resultList4 = playerNumber.batterGernerateNumber(userInput4);
-        assertThat(resultList4)
-                .hasSize(0);
+        assertThatThrownBy(() -> playerNumber.batterGernerateNumber(userInput4))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못입력하였습니다.");
 
         String userInput5 = "111";
-        List<String> resultList5 = playerNumber.batterGernerateNumber(userInput5);
-        assertThat(resultList5)
-                .hasSize(1)
-                .containsExactly("1");
+        assertThatThrownBy(() -> playerNumber.batterGernerateNumber(userInput5))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못입력하였습니다.");
+
+        String userInput6 = "1234";
+        assertThatThrownBy(() -> playerNumber.batterGernerateNumber(userInput6))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("잘못입력하였습니다.");
     }
 
 }
